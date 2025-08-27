@@ -32,3 +32,13 @@ def main():
             print(f"Rolled {d1} and {d2} (total {d1 + d2})")
             move_player(player, d1 + d2) # move the player
             handle_space(player, players, ownership) # handle the tile they land on
+        if doubles:
+                print("Doubles! Roll again.")
+                continue # roll again if doubles
+        save_players(players) # save the game state
+        save_ownerships(ownership)
+
+        turn += 1 # next player's turn
+
+if __name__ == "__main__": 
+    main() # start the game loop
