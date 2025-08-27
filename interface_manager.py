@@ -14,7 +14,7 @@ def main():
     if not players: # if no players, set up new game
         num = int(input("How many players? ")) # get number of players
         for i in range(num):
-            name = input(f"Enter name for player {i + 1}: ")
+            name = input(f"Enter name for player {i + 1}: ") # when displaying, start count at 1 =>{i +1}
             players.append({ # create a new player dict
                 "name": name,
                 "balance": 1500,
@@ -25,7 +25,7 @@ def main():
     turn = 0
     while True:
         display_board(players)    # show the board state
-        player = players[turn % len(players)] # current player
+        player = players[turn % len(players)] # picks current player
         print(f"\n{player['name']}'s turn. Balance: ${player['balance']}") # show whose turn it is
 
         if player["in_jail"]:
@@ -36,10 +36,10 @@ def main():
             d1, d2, doubles = roll_dice()
             print(f"Rolled {d1} and {d2} (total {d1 + d2})")
             move_player(player, d1 + d2) # move the player
-            handle_space(player, players, ownership) # handle the tile they land on
+            handle_space(player, players, ownership) # handles what happens depending on the space landed on(e.g go to jail)
         if doubles:
                 print("Doubles! Roll again.")
-                continue # roll again if doubles
+                continue # makes the loop repeat for another turn of the same player
         save_players(players) # save the game state
         save_ownerships(ownership)
 
