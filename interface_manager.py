@@ -1,5 +1,10 @@
 # runs the game loop & CLI interface
 
+# imports
+from board_manager import display_board
+from player_manager import setup_database, load_players, save_players, load_ownerships, save_ownerships
+from game_logic import roll_dice, move_player, handle_space
+
 
 def main():
     setup_database()
