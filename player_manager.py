@@ -32,3 +32,11 @@ def save_players(players):
                   (p["name"], p["balance"], p["position"], p["in_jail"]))
     conn.commit()
     conn.close()
+
+def load_ownership():
+    conn = sqlite3.connect(DB)
+    c = conn.cursor()
+    c.execute("SELECT property, owner FROM ownership")
+    rows = c.fetchall()
+    conn.close()
+    return {r[0]: r[1] for r in rows}
