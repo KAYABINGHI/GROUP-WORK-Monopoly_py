@@ -40,3 +40,12 @@ def load_ownership():
     rows = c.fetchall()
     conn.close()
     return {r[0]: r[1] for r in rows}
+
+def save_ownership(ownership):
+    conn = sqlite3.connect(DB)
+    c = conn.cursor()
+    c.execute("DELETE FROM ownership")
+    for prop, owner in ownership.items():
+        c.execute("INSERT INTO ownership VALUES (?, ?)", (prop, owner))
+    conn.commit()
+    conn.close()
