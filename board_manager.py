@@ -29,3 +29,19 @@ PROPERTY_PRICES = {
     "Pacific Avenue": 300, "North Carolina Avenue": 300, "Pennsylvania Avenue": 320,
     "Park Place": 350, "Boardwalk": 400
 }
+
+RENT = {prop: price // 5 for prop, price in PROPERTY_PRICES.items()}
+
+TAXES = {"Income Tax": 200, "Luxury Tax": 100}
+
+def display_board(players):
+    """Simple CLI display of board with player positions"""
+    print("\n=== Monopoly Board (Positions) ===")
+    for i, space in enumerate(BOARD):
+        marks = []
+        for p in players:
+            if p["position"] == i:
+                marks.append(p["name"][0])  # show first letter
+        mark_str = " ".join(marks)
+        print(f"{i:2d}: {space:25} {mark_str}")
+    print("==================================\n")
