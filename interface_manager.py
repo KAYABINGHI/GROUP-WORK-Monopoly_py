@@ -18,3 +18,13 @@ def check_winner(players):
         print(f"\n{players[0]['name']} wins the game with ${players[0]['balance']}!")
         return True
     return False
+def take_turn(player, players, ownership):
+    if player["in_jail"]:
+        print(f"{player['name']} is in Jail! Skips this turn.")
+        player["in_jail"] = 0
+        return
+    input(f"{player['name']}, press Enter to roll dice...")
+    d1, d2, doubles = roll_dice()
+    print(f"Rolled {d1} and {d2} (total {d1 + d2})")
+    move_player(player, d1 + d2)
+    handle_space(player, players, ownership)
