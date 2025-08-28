@@ -27,3 +27,29 @@ def move_player(player, steps):
     player["position"] = (player["position"] + steps) % len(BOARD)
     if player["position"] == 0:  # Passed GO
         player["balance"] += 200
+
+def handle_space(player, players, ownership):
+    space = BOARD[player["position"]]
+
+    # Taxes
+    if space in TAXES:
+        player["balance"] -= TAXES[space]
+        print(f"{player['name']} pays {TAXES[space]} for {space}.")
+
+    # Properties
+    elif space in PROPERTY_PRICES:
+        if space not in ownership:
+            choice = input(f"{player['name']}, buy {space} for ${PROPERTY_PRICES[space]}? (y/n): ").lower()
+            if choice == "y" and player["balance"] >= PROPERTY_PRICES[space]:
+                player["balance"] -= PROPERTY_PRICES[space]
+                ownership[space] = player["name"]
+                print(f"{player['name']} bought {space}.")
+        else:
+            owner = ownership[space]
+            if owner != player["name"]:
+                rent = RENT[space]
+                player["balance"] -= rent
+                for p in players:
+                    if p["name"] == owner:
+                        p["balance"] += rent
+                print(f"{player['name']} pays ${rent} rent to {owner}.")
