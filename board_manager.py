@@ -35,13 +35,13 @@ RENT = {prop: price // 5 for prop, price in PROPERTY_PRICES.items()}
 TAXES = {"Income Tax": 200, "Luxury Tax": 100}
 
 def display_board(players):
-    """Simple CLI display of board with player positions"""
+    #display of board with player positions
     print("\n=== Monopoly Board (Positions) ===")
-    for i, space in enumerate(BOARD):
-        marks = []
-        for p in players:
-            if p["position"] == i:
-                marks.append(p["name"][0])  # show first letter
-        mark_str = " ".join(marks)
+    for i, space in enumerate(BOARD): #enumerate gives index and value(o0 to 39)
+        marks = [] 
+        for p in players: 
+            if p["position"] == i: #if player is on the current space
+                marks.append(p["name"][0])  # show first letter of the player's name
+        mark_str = " ".join(marks)  # combine all letters into a string (if multiple players on same space)
         print(f"{i:2d}: {space:25} {mark_str}")
     print("==================================\n")
