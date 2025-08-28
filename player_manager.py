@@ -22,3 +22,13 @@ def load_players():
     rows = c.fetchall()
     conn.close()
     return [{"name": r[0], "balance": r[1], "position": r[2], "in_jail": r[3]} for r in rows]
+
+def save_players(players):
+    conn = sqlite3.connect(DB)
+    c = conn.cursor()
+    c.execute("DELETE FROM players")
+    for p in players:
+        c.execute("INSERT INTO players VALUES (?, ?, ?, ?)",
+                  (p["name"], p["balance"], p["position"], p["in_jail"]))
+    conn.commit()
+    conn.close()
