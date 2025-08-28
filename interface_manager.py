@@ -20,7 +20,7 @@ def main():
                 "balance": 1500,
                 "position": 0, # strats at Go tile
                 "in_jail": 0, # not in jail at start
-            }) # sets the default starting values
+            }) # sets the default starting values of a player
 
     turn = 0
     while True:
@@ -47,3 +47,4 @@ def main():
 
 if __name__ == "__main__": 
     main() # start the game loop
+ 
