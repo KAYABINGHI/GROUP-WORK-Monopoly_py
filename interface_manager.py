@@ -39,3 +39,18 @@ def main():
         players = create_players()
 
     turn = 0
+    while True:
+        players = remove_bankrupt(players)
+        if check_winner(players):
+            break
+
+        display_board(players)
+        player = players[turn % len(players)]
+        print(f"\n{player['name']}'s turn. Balance: ${player['balance']}")
+
+        take_turn(player, players, ownership)
+
+        save_players(players)
+        save_ownership(ownership)
+
+        turn += 1
