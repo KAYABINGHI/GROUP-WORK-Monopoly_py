@@ -30,9 +30,9 @@ PROPERTY_PRICES = {
     "Park Place": 350, "Boardwalk": 400
 }
 
-RENT = {prop: price // 5 for prop, price in PROPERTY_PRICES.items()}
+RENT = {prop: price // 5 for prop, price in PROPERTY_PRICES.items()} # Rent is 1/5th of property price
 
-TAXES = {"Income Tax": 200, "Luxury Tax": 100}
+TAXES = {"Income Tax": 200, "Luxury Tax": 100} # Fixed tax amounts
 
 def display_board(players):
     #display of board with player positions
