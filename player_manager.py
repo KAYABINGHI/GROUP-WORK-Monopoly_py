@@ -14,3 +14,11 @@ def setup_database():
                  (property TEXT PRIMARY KEY, owner TEXT)""")
     conn.commit()
     conn.close()
+
+def load_players():
+    conn = sqlite3.connect(DB)
+    c = conn.cursor()
+    c.execute("SELECT name, balance, position, in_jail FROM players")
+    rows = c.fetchall()
+    conn.close()
+    return [{"name": r[0], "balance": r[1], "position": r[2], "in_jail": r[3]} for r in rows]
