@@ -53,3 +53,33 @@ def handle_space(player, players, ownership):
                     if p["name"] == owner:
                         p["balance"] += rent
                 print(f"{player['name']} pays ${rent} rent to {owner}.")
+
+# Chance
+    elif space == "Chance":
+        card = random.choice(CHANCE_CARDS)
+        apply_card(player, card)
+
+    # Community Chest
+    elif space == "Community Chest":
+        card = random.choice(COMMUNITY_CARDS)
+        apply_card(player, card)
+
+    # Jail
+    elif space == "Go To Jail":
+        print(f"{player['name']} goes to Jail!")
+        player["position"] = BOARD.index("Jail")
+        player["in_jail"] = 1
+
+def apply_card(player, card):
+    text, effect = card
+    print(f"Card: {text}")
+    if isinstance(effect, int):
+        player["balance"] += effect
+    elif effect == "GO":
+        player["position"] = 0
+        player["balance"] += 200
+    elif effect == "Jail":
+        player["position"] = BOARD.index("Jail")
+        player["in_jail"] = 1
+    elif isinstance(effect, str) and effect.startswith("-"):
+        player["position"] = (player["position"] + int(effect)) % len(BOARD)
